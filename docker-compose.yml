@@ -1,0 +1,25 @@
+version: "3.2"
+services:
+
+  bot:
+    build:
+      dockerfile: bot/Dockerfile
+      context: ./
+    networks:
+      - gateway
+    command: ./bin/bot configs/bot.json
+    restart: always
+    depends_on:
+      - stockserver
+
+  stockserver:
+    build:
+      dockerfile: stockserver/Dockerfile
+      context: ./
+    networks:
+      - gateway
+    command: ./bin/stockserver configs/stockserver.json
+    restart: always
+
+networks:
+  gateway: {}

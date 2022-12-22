@@ -1,0 +1,6 @@
+{
+    "StocksHost": "stockserver:8080",
+    "StockTCPHost": "stockserver:1467",
+    "TelegramToken": /*место для токена тг*/ ,
+    "TinkoffToken": /*место для токена тинькоф*/
+}
