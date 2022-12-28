@@ -64,6 +64,7 @@ func NewStockServer(tinkoffToken string) (*StockServer, error) {
 }
 
 func (s *StockServer) handleRequest(ticker, fromStr, toStr, intervalStr string) ([]byte, error) {
+	fmt.Println("handling: ", ticker, fromStr, toStr, intervalStr)
 
 	from, err := time.Parse(time.RFC3339, fromStr)
 	if err != nil {
@@ -110,6 +111,7 @@ func (s *StockServer) CandlestickChartHttpHandler(ctx *fasthttp.RequestCtx) {
 	)
 
 	if err != nil {
+		fmt.Println("err handling", err)
 		s.WriteBadRequest(ctx, err.Error())
 		return
 	}

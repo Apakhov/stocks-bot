@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button type="button" id="btn">
+        Reload
+    </button>
+
+    <select name="tickers" id="tickers">
+        <option value="VKCO">VKCO</option>
+        <option value="SBER">SBER</option>
+        <option value="SBERP">SBERP</option>
+        <option value="YNDX">YNDX</option>
+        <option value="GAZP">GAZP</option>
+        <option value="GAZP">GAZP</option>
+        <option value="VTBR">VTBR</option>
+        <option value="FIXP">FIXP</option>
+        <option value="MOEX">MOEX</option>
+        <option value="OZON">OZON</option>
+        <option value="RASP">RASP</option>
+        <option value="POLY">POLY</option>
+        <option value="AAPL">AAPL</option>
+        <option value="TAL">TAL</option>
+        <option value="MSFT">MSFT</option>
+        <option value="SPCE">SPCE</option>
+        <option value="PFE">PFE</option>
+        <option value="MRNA">MRNA</option>
+        <option value="BABA">BABA</option>
+        <option value="USDRUB">USDRUB</option>
+    </select>
+
+
+    <select name="timeInterval" id="timeInterval">
+        <option value="24">1d</option>
+        <option value="12">12h</option>
+        <option value="6">6h</option>
+        <option value="3">3h</option>
+        <option value="1">1h</option>
+    </select>
+
+
+    <div id="imgDiv">
+
+    </div>
+
+
+    <script>
+        console.log("connected");
+        const imgDiv = document.getElementById("imgDiv");
+        const timeInterval = document.getElementById("timeInterval");
+        const tickers = document.getElementById("tickers");
+
+
+        const updateImg = () => {
+            var valueTimeInterval = timeInterval.value;
+            var textTimeInterval = timeInterval.options[timeInterval.selectedIndex].text;
+            console.log(valueTimeInterval, textTimeInterval);
+
+            let value = tickers.value;
+            let text = tickers.options[tickers.selectedIndex].text;
+            console.log(value, text);
+
+            const date = new Date();
+            console.log(date.toISOString());
+            let prev_date = new Date();
+            prev_date.setHours(prev_date.getHours() - Number(valueTimeInterval));
+
+
+            console.log(date.toISOString(), prev_date.toISOString());
+
+            var val = document.getElementById('imgDiv').value,
+                src = 'http://{{ .StocksHost }}/candlesticks/' + value + '/' + prev_date.toISOString() + '/' + date.toISOString() + '/5min/chart.jpg',
+                img = document.createElement('img');
+
+            img.src = src;
+            imgDiv.replaceChildren(img);
+            // document.body.replaceChild(img);
+            // document.body.appendChild();
+        }
+
+        var intervalId = window.setInterval(function () {
+            console.log("update");
+            updateImg();
+        }, 60 * 1000);
+        updateImg();
+
+        timeInterval.onchange = updateImg;
+        tickers.onchange = updateImg;
+
+        document.getElementById('btn').onclick = updateImg;
+        // document.getElementById('btn') = updateImg;
+
+        //on form submit
+    </script>
+</body>
+
+</html>

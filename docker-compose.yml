@@ -20,6 +20,19 @@ services:
       - gateway
     command: ./bin/stockserver configs/stockserver.json
     restart: always
+    ports:
+      - "8080:8080"
+
+  web:
+    build:
+      dockerfile: web/Dockerfile
+      context: ./
+    networks:
+      - gateway
+    command: ./bin/web configs/web.json
+    restart: always
+    ports:
+      - "80:80"
 
 networks:
   gateway: {}

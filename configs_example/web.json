@@ -1,0 +1,5 @@
+{
+    "WebHost": ":80",
+    "StocksHost": "127.0.0.1:8080",
+    "HtmlFile": "web/main.html"
+}
